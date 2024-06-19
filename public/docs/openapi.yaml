@@ -1,0 +1,587 @@
+openapi: 3.0.3
+info:
+  title: 'GiG Media | Take-home PHP test | API Documentation'
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://127.0.0.1:8080'
+paths:
+  /api/posts:
+    get:
+      summary: 'View all posts'
+      operationId: viewAllPosts
+      description: ''
+      parameters:
+        -
+          in: query
+          name: limit
+          description: 'Number of items per page'
+          example: 3
+          required: false
+          schema:
+            type: integer
+            description: 'Number of items per page'
+            example: 3
+        -
+          in: query
+          name: page
+          description: 'Page number'
+          example: 2
+          required: false
+          schema:
+            type: integer
+            description: 'Page number'
+            example: 2
+        -
+          in: query
+          name: id
+          description: 'Filter: id (strict)'
+          example: 1
+          required: false
+          schema:
+            type: integer
+            description: 'Filter: id (strict)'
+            example: 1
+        -
+          in: query
+          name: topic
+          description: 'Filter: topic (partial)'
+          example: minus
+          required: false
+          schema:
+            type: string
+            description: 'Filter: topic (partial)'
+            example: minus
+        -
+          in: query
+          name: comment
+          description: 'Filter: returns posts that have one or multiple comments that contain the word (partial)'
+          example: laughing
+          required: false
+          schema:
+            type: string
+            description: 'Filter: returns posts that have one or multiple comments that contain the word (partial)'
+            example: laughing
+        -
+          in: query
+          name: created_at
+          description: 'Filter: created at date (partial)'
+          example: '2024-06-19'
+          required: false
+          schema:
+            type: string
+            description: 'Filter: created at date (partial)'
+            example: '2024-06-19'
+        -
+          in: query
+          name: updated_at
+          description: 'Filter: comment (partial)'
+          example: '2024-06-19'
+          required: false
+          schema:
+            type: string
+            description: 'Filter: comment (partial)'
+            example: '2024-06-19'
+        -
+          in: query
+          name: with
+          description: 'Including relational data'
+          example: null
+          required: false
+          schema:
+            type: string
+            description: 'Including relational data'
+            example: null
+            enum:
+              - comments
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  result:
+                    -
+                      id: 2
+                      topic: 'Eum et minus soluta aliquam.'
+                      created_at: '2024-06-19T17:29:09.000000Z'
+                      updated_at: '2024-06-19T17:29:09.000000Z'
+                      comments:
+                        -
+                          id: 2055
+                          post_id: 2
+                          content: 'cool funny laughing nice awesome great horrible'
+                          abbreviation: cflnagh
+                          created_at: '2024-06-19T17:29:09.000000Z'
+                          updated_at: '2024-06-19T17:29:09.000000Z'
+                  count: 1
+                properties:
+                  result:
+                    type: array
+                    example:
+                      -
+                        id: 2
+                        topic: 'Eum et minus soluta aliquam.'
+                        created_at: '2024-06-19T17:29:09.000000Z'
+                        updated_at: '2024-06-19T17:29:09.000000Z'
+                        comments:
+                          -
+                            id: 2055
+                            post_id: 2
+                            content: 'cool funny laughing nice awesome great horrible'
+                            abbreviation: cflnagh
+                            created_at: '2024-06-19T17:29:09.000000Z'
+                            updated_at: '2024-06-19T17:29:09.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 2
+                        topic:
+                          type: string
+                          example: 'Eum et minus soluta aliquam.'
+                        created_at:
+                          type: string
+                          example: '2024-06-19T17:29:09.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2024-06-19T17:29:09.000000Z'
+                        comments:
+                          type: array
+                          example:
+                            -
+                              id: 2055
+                              post_id: 2
+                              content: 'cool funny laughing nice awesome great horrible'
+                              abbreviation: cflnagh
+                              created_at: '2024-06-19T17:29:09.000000Z'
+                              updated_at: '2024-06-19T17:29:09.000000Z'
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 2055
+                              post_id:
+                                type: integer
+                                example: 2
+                              content:
+                                type: string
+                                example: 'cool funny laughing nice awesome great horrible'
+                              abbreviation:
+                                type: string
+                                example: cflnagh
+                              created_at:
+                                type: string
+                                example: '2024-06-19T17:29:09.000000Z'
+                              updated_at:
+                                type: string
+                                example: '2024-06-19T17:29:09.000000Z'
+                  count:
+                    type: integer
+                    example: 1
+      tags:
+        - Endpoints
+      security: []
+  '/api/posts/{post_id}':
+    delete:
+      summary: 'Delete a post'
+      operationId: deleteAPost
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: boolean
+                example: true
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors:
+                    -
+                      status: 404
+                      title: 'Resource not found'
+                properties:
+                  errors:
+                    type: array
+                    example:
+                      -
+                        status: 404
+                        title: 'Resource not found'
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          example: 404
+                        title:
+                          type: string
+                          example: 'Resource not found'
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: post_id
+        description: 'The ID of the post.'
+        example: 14
+        required: true
+        schema:
+          type: integer
+  /api/comments:
+    get:
+      summary: 'View all comments'
+      operationId: viewAllComments
+      description: ''
+      parameters:
+        -
+          in: query
+          name: limit
+          description: 'Number of items per page'
+          example: 3
+          required: false
+          schema:
+            type: integer
+            description: 'Number of items per page'
+            example: 3
+        -
+          in: query
+          name: page
+          description: 'Page number'
+          example: 2
+          required: false
+          schema:
+            type: integer
+            description: 'Page number'
+            example: 2
+        -
+          in: query
+          name: id
+          description: 'Filter: id (strict)'
+          example: 1
+          required: false
+          schema:
+            type: integer
+            description: 'Filter: id (strict)'
+            example: 1
+        -
+          in: query
+          name: content
+          description: 'Filter: content (partial)'
+          example: 'cool funny'
+          required: false
+          schema:
+            type: string
+            description: 'Filter: content (partial)'
+            example: 'cool funny'
+        -
+          in: query
+          name: abbreviation
+          description: 'Filter: abbreviation (partial)'
+          example: cf
+          required: false
+          schema:
+            type: string
+            description: 'Filter: abbreviation (partial)'
+            example: cf
+        -
+          in: query
+          name: post
+          description: 'Filter: returns comments that have post that contain the word (partial)'
+          example: 'post content'
+          required: false
+          schema:
+            type: string
+            description: 'Filter: returns comments that have post that contain the word (partial)'
+            example: 'post content'
+        -
+          in: query
+          name: created_at
+          description: 'Filter: created at date (partial)'
+          example: '2024-06-19'
+          required: false
+          schema:
+            type: string
+            description: 'Filter: created at date (partial)'
+            example: '2024-06-19'
+        -
+          in: query
+          name: updated_at
+          description: 'Filter: comment (partial)'
+          example: '2024-06-19'
+          required: false
+          schema:
+            type: string
+            description: 'Filter: comment (partial)'
+            example: '2024-06-19'
+        -
+          in: query
+          name: with
+          description: 'Including relational data'
+          example: post
+          required: false
+          schema:
+            type: string
+            description: 'Including relational data'
+            example: post
+            enum:
+              - post
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  result:
+                    -
+                      id: 2055
+                      post_id: 5
+                      content: 'cool funny laughing nice awesome great horrible'
+                      abbreviation: cflnagh
+                      created_at: '2024-06-19T17:29:09.000000Z'
+                      updated_at: '2024-06-19T17:29:09.000000Z'
+                      post:
+                        id: 5
+                        topic: 'Eum et minus soluta aliquam.'
+                        created_at: '2024-06-19T17:29:09.000000Z'
+                        updated_at: '2024-06-19T17:29:09.000000Z'
+                  count: 1
+                properties:
+                  result:
+                    type: array
+                    example:
+                      -
+                        id: 2055
+                        post_id: 5
+                        content: 'cool funny laughing nice awesome great horrible'
+                        abbreviation: cflnagh
+                        created_at: '2024-06-19T17:29:09.000000Z'
+                        updated_at: '2024-06-19T17:29:09.000000Z'
+                        post:
+                          id: 5
+                          topic: 'Eum et minus soluta aliquam.'
+                          created_at: '2024-06-19T17:29:09.000000Z'
+                          updated_at: '2024-06-19T17:29:09.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 2055
+                        post_id:
+                          type: integer
+                          example: 5
+                        content:
+                          type: string
+                          example: 'cool funny laughing nice awesome great horrible'
+                        abbreviation:
+                          type: string
+                          example: cflnagh
+                        created_at:
+                          type: string
+                          example: '2024-06-19T17:29:09.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2024-06-19T17:29:09.000000Z'
+                        post:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              example: 5
+                            topic:
+                              type: string
+                              example: 'Eum et minus soluta aliquam.'
+                            created_at:
+                              type: string
+                              example: '2024-06-19T17:29:09.000000Z'
+                            updated_at:
+                              type: string
+                              example: '2024-06-19T17:29:09.000000Z'
+                  count:
+                    type: integer
+                    example: 1
+      tags:
+        - Endpoints
+      security: []
+    post:
+      summary: 'Create a comment'
+      operationId: createAComment
+      description: ''
+      parameters: []
+      responses:
+        201:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 2055
+                  post_id: 1
+                  content: 'nice awesome great'
+                  abbreviation: nag
+                  created_at: '2024-06-19T17:29:09.000000Z'
+                  updated_at: '2024-06-19T17:29:09.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 2055
+                  post_id:
+                    type: integer
+                    example: 1
+                  content:
+                    type: string
+                    example: 'nice awesome great'
+                  abbreviation:
+                    type: string
+                    example: nag
+                  created_at:
+                    type: string
+                    example: '2024-06-19T17:29:09.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2024-06-19T17:29:09.000000Z'
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors:
+                    -
+                      status: 422
+                      source:
+                        pointer: post_id
+                      detail: 'The selected post id is invalid.'
+                    -
+                      status: 422
+                      source:
+                        pointer: abbreviation
+                      detail: 'The abbreviation generated for the specified content already exists.'
+                properties:
+                  errors:
+                    type: array
+                    example:
+                      -
+                        status: 422
+                        source:
+                          pointer: post_id
+                        detail: 'The selected post id is invalid.'
+                      -
+                        status: 422
+                        source:
+                          pointer: abbreviation
+                        detail: 'The abbreviation generated for the specified content already exists.'
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          example: 422
+                        source:
+                          type: object
+                          properties:
+                            pointer:
+                              type: string
+                              example: post_id
+                        detail:
+                          type: string
+                          example: 'The selected post id is invalid.'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                post_id:
+                  type: integer
+                  description: 'The ID of the post.'
+                  example: 1
+                content:
+                  type: string
+                  description: Content.
+                  example: 'nice awesome great'
+                abbreviation:
+                  type: string
+                  description: 'Short (unique) version of the content. Generates automatically. Ignored if sent.'
+                  example: null
+              required:
+                - post_id
+                - content
+      security: []
+  '/api/comments/{comment_id}':
+    delete:
+      summary: 'Delete a comment'
+      operationId: deleteAComment
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: boolean
+                example: true
+        404:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  errors:
+                    -
+                      status: 404
+                      title: 'Resource not found'
+                properties:
+                  errors:
+                    type: array
+                    example:
+                      -
+                        status: 404
+                        title: 'Resource not found'
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: integer
+                          example: 404
+                        title:
+                          type: string
+                          example: 'Resource not found'
+      tags:
+        - Endpoints
+      security: []
+    parameters:
+      -
+        in: path
+        name: comment_id
+        description: 'The ID of the comment.'
+        example: 20
+        required: true
+        schema:
+          type: integer
+tags:
+  -
+    name: Endpoints
+    description: ''

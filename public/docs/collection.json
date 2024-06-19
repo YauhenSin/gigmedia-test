@@ -1,0 +1,344 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/127.0.0.1:8080"
+        }
+    ],
+    "info": {
+        "name": "GiG Media | Take-home PHP test | API Documentation",
+        "_postman_id": "618d03f6-a3d3-4cf7-abf1-4c498ca1f28f",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "View all posts",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/posts",
+                            "query": [
+                                {
+                                    "key": "limit",
+                                    "value": "3",
+                                    "description": "Number of items per page",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "2",
+                                    "description": "Page number",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "Filter: id (strict)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "topic",
+                                    "value": "minus",
+                                    "description": "Filter: topic (partial)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "comment",
+                                    "value": "laughing",
+                                    "description": "Filter: returns posts that have one or multiple comments that contain the word (partial)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "created_at",
+                                    "value": "2024-06-19",
+                                    "description": "Filter: created at date (partial)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "updated_at",
+                                    "value": "2024-06-19",
+                                    "description": "Filter: comment (partial)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "with",
+                                    "value": "",
+                                    "description": "Including relational data",
+                                    "disabled": true
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/posts?limit=3&page=2&id=1&topic=minus&comment=laughing&created_at=2024-06-19&updated_at=2024-06-19&with="
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"result\":[{\"id\":2,\"topic\":\"Eum et minus soluta aliquam.\",\"created_at\":\"2024-06-19T17:29:09.000000Z\",\"updated_at\":\"2024-06-19T17:29:09.000000Z\",\"comments\":[{\"id\":2055,\"post_id\":2,\"content\":\"cool funny laughing nice awesome great horrible\",\"abbreviation\":\"cflnagh\",\"created_at\":\"2024-06-19T17:29:09.000000Z\",\"updated_at\":\"2024-06-19T17:29:09.000000Z\"}]}],\"count\":1}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete a post",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/posts\/:post_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/posts\/:post_id",
+                            "variable": [
+                                {
+                                    "id": "post_id",
+                                    "key": "post_id",
+                                    "value": "14",
+                                    "description": "The ID of the post."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "true",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"errors\":[{\"status\":404,\"title\":\"Resource not found\"}]}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "View all comments",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/comments",
+                            "query": [
+                                {
+                                    "key": "limit",
+                                    "value": "3",
+                                    "description": "Number of items per page",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "2",
+                                    "description": "Page number",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "id",
+                                    "value": "1",
+                                    "description": "Filter: id (strict)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "content",
+                                    "value": "cool+funny",
+                                    "description": "Filter: content (partial)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "abbreviation",
+                                    "value": "cf",
+                                    "description": "Filter: abbreviation (partial)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "post",
+                                    "value": "post+content",
+                                    "description": "Filter: returns comments that have post that contain the word (partial)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "created_at",
+                                    "value": "2024-06-19",
+                                    "description": "Filter: created at date (partial)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "updated_at",
+                                    "value": "2024-06-19",
+                                    "description": "Filter: comment (partial)",
+                                    "disabled": false
+                                },
+                                {
+                                    "key": "with",
+                                    "value": "post",
+                                    "description": "Including relational data",
+                                    "disabled": false
+                                }
+                            ],
+                            "raw": "{{baseUrl}}\/api\/comments?limit=3&page=2&id=1&content=cool+funny&abbreviation=cf&post=post+content&created_at=2024-06-19&updated_at=2024-06-19&with=post"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"result\":[{\"id\":2055,\"post_id\":5,\"content\":\"cool funny laughing nice awesome great horrible\",\"abbreviation\":\"cflnagh\",\"created_at\":\"2024-06-19T17:29:09.000000Z\",\"updated_at\":\"2024-06-19T17:29:09.000000Z\",\"post\":{\"id\":5,\"topic\":\"Eum et minus soluta aliquam.\",\"created_at\":\"2024-06-19T17:29:09.000000Z\",\"updated_at\":\"2024-06-19T17:29:09.000000Z\"}}],\"count\":1}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Create a comment",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/comments",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/comments"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"post_id\":1,\"content\":\"nice awesome great\"}"
+                        },
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 201,
+                            "body": "{\"id\":2055,\"post_id\":1,\"content\":\"nice awesome great\",\"abbreviation\":\"nag\",\"created_at\":\"2024-06-19T17:29:09.000000Z\",\"updated_at\":\"2024-06-19T17:29:09.000000Z\"}",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "{\"errors\":[{\"status\":422,\"source\":{\"pointer\":\"post_id\"},\"detail\":\"The selected post id is invalid.\"},{\"status\":422,\"source\":{\"pointer\":\"abbreviation\"},\"detail\":\"The abbreviation generated for the specified content already exists.\"}]}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete a comment",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/comments\/:comment_id",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/comments\/:comment_id",
+                            "variable": [
+                                {
+                                    "id": "comment_id",
+                                    "key": "comment_id",
+                                    "value": "20",
+                                    "description": "The ID of the comment."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "true",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 404,
+                            "body": "{\"errors\":[{\"status\":404,\"title\":\"Resource not found\"}]}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}
