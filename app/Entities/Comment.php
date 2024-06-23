@@ -17,7 +17,7 @@ class Comment
     {
         return array_reduce(
             explode(' ', $this->content),
-            fn(string $result, string $word) => $result .= substr($word, 0 ,1),
+            fn (string $result, string $word) => $result .= substr($word, 0, 1),
             ''
         );
     }
